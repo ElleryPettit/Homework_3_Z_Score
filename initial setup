@@ -108,6 +108,18 @@ def z_score(x, mu, sigma):
     
     # Your code goes between this comment and the return
 
+def z_score(data_set):
+    """
+    This function calculates the Z scores for each value in the data_set.
+    """
+    
+    avg = mean(data_set)  # Calculate the mean of the dataset
+    
+    std_dev = stdev(data_set, avg)  # Calculate the standard deviation of the dataset
+    
+    z_score = [(x - avg) / std_dev for x in data_set]  # Calculate the Z score for each value in the dataset
+    
+    return z_score
 
 
 
