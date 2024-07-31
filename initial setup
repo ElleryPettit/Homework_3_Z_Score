@@ -101,29 +101,14 @@ def z_score(x, mu, sigma):
     Returns the z-score of x
     """
     
-def mean(data_set):
-    """
-    This function will return the mean of the data_set(population)
-    **Do not change this function**
-    """
-    return sum(data_set)/len(data_set)
-
-def stdev(data_set, avg):
-    """
-    This function will return the standard deviation of the data_set(population), given the mean of the data_set (avg)
-    **Do not change this function**
-    """
-    variance = sum([(integer - avg) ** 2 for integer in data_set])/len(data_set)
-    # return the square root of the variance calculation 
-    return variance ** .5
 
 
 
-
-
-
-    # Participating group member names go in this comment
+    # Ellery Pettit, Andrew Provan, Caden J Hans
     
     # Your code goes between this comment and the return
+
+
+
 
     return # Place the calculated z-score result between the return statement and this comment so it will be returned by the z_score function
