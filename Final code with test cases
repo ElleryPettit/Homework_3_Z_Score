@@ -101,44 +101,26 @@ def z_score(x, mu, sigma):
     Returns the z-score of x
     """
     
-
-
-
-    # Ellery Pettit, Andrew Provan, Caden J Hans
+    # Participating group member names go in this comment
     
     # Your code goes between this comment and the return
-
     
-def mean(data_set):
-    """
-    This function will return the mean of the data_set(population)
-    **Do not change this function**
-    """
-    return sum(data_set)/len(data_set) 
 
-def stdev(data_set, avg):
-    """
-    This function will return the standard deviation of the data_set(population), given the       mean of the data_set (avg)
-    **Do not change this function**
-    """
-    variance = sum([(integer - avg) ** 2 for integer in data_set])/len(data_set)
-    # return the square root of the variance calculation 
-    return variance ** .5
-    
-def z_score_of_x(data_set, x):
-    """
-    This function calculates the Z score of a specific value (x) from the data_set.
-    """
-    avg = mean(data_set)  # Calculate the mean of the dataset
+    z_score = (x - mu) / sigma
 
-    std_dev = stdev(data_set, avg)  # Calculate the standard deviation of the data set
-    
-    z_score = (x - avg) / (std_dev) # Calculates Z score for the value x from the data set
-    
-    return z_score
+    return z_score # Place the calculated z-score result between the return statement and this comment so it will be returned by the z_score function
 
+#test cases
 
-print("The Z Score of X=", z_score_of_x(data_set, x)) #returns the Z Score for a given value X from a given data set
+mean1 = mean(population1)
+stdev1 = stdev(population1, mean1)
 
+mean2 = mean(population2)
+stdev2 = stdev(population2, mean2)
 
-    return # Place the calculated z-score result between the return statement and this comment so it will be returned by the z_score function
+mean3 = mean(population3)
+stdev3 = stdev(population3, mean3)
+
+print(z_score(x, mean1, stdev1)) #Where "x" is a value from population1
+print(z_score(x, mean2, stdev2)) #Where "x" is a value from population2
+print(z_score(x, mean3, stdev3)) #Where "x" is a value from population3
