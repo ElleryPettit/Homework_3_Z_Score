@@ -101,7 +101,7 @@ def z_score(x, mu, sigma):
     Returns the z-score of x
     """
     
-    # Participating group member names go in this comment
+    # Ellery Pettit, Andrew Provan, Caden J Hans
     
     # Your code goes between this comment and the return
     
@@ -110,7 +110,10 @@ def z_score(x, mu, sigma):
 
     return z_score # Place the calculated z-score result between the return statement and this comment so it will be returned by the z_score function
 
+
+###########
 #test cases
+###########
 
 mean1 = mean(population1)
 stdev1 = stdev(population1, mean1)
@@ -121,6 +124,74 @@ stdev2 = stdev(population2, mean2)
 mean3 = mean(population3)
 stdev3 = stdev(population3, mean3)
 
-print(z_score(x, mean1, stdev1)) #Where "x" is a value from population1
-print(z_score(x, mean2, stdev2)) #Where "x" is a value from population2
-print(z_score(x, mean3, stdev3)) #Where "x" is a value from population3
+#population1
+print(z_score(98, mean1, stdev1)) #Expected = 1.6467480771198
+print(z_score(66, mean1, stdev1)) #Expected = 0.5026764647048
+print(z_score(45, mean1, stdev1)) #Expected = -0.2481205309425
+print(z_score(21, mean1, stdev1)) #Expected = -1.1061742402537
+print(z_score(3, mean1, stdev1)) #Expected = -1.7497145222371
+
+#population2
+print(z_score(24, mean2, stdev2)) #Expected = 1.6977493752543
+print(z_score(2, mean2, stdev2)) #Expected = 0.1732397321688
+print(z_score(0, mean2, stdev2)) #Expected = 0.0346479464338
+print(z_score(-3, mean2, stdev2)) #Expected = -0.1732397321688
+print(z_score(-25, mean2, stdev2)) #Expected = -1.6977493752543
+
+#population3
+print(z_score(675, mean3, stdev3)) #Expected = 1.6712580435935
+print(z_score(500, mean3, stdev3)) #Expected = 0.8046797987672
+print(z_score(175, mean3, stdev3)) #Expected = -0.8046797987672
+print(z_score(25, mean3, stdev3)) #Expected = -1.5474611514754
+print(z_score(0, mean3, stdev3)) #Expected = -1.6712580435935
+
+
+
+#####################
+#Test automation code
+#####################
+pop1_z_scores = [-1.3564399054695,-0.8559085750379,1.5752436013439,1.6109958392318,-1.1061742402537,-0.8201563371500,
+                 -0.8201563371500,-1.7139622843492,0.2166585616011,-0.3553772446064,-0.9631652887018,1.6109958392318,
+                 -0.1051115793906,-0.6771473855981,0.8244466056965,0.0378973721612,-1.3564399054695,0.0378973721612,
+                 -0.2481205309425,1.2534734603521,0.8244466056965,0.5026764647048,0.3596675131530,0.1094018479372,
+                 0.1809063237131,-0.2838727688305,-0.2838727688305,1.5037391255679,-1.1776787160297,1.5752436013439,
+                 -1.4279443812454,0.2524107994891,1.2177212224642,1.2892256982401,0.3239152752650,0.5741809404808,
+                 -0.5341384340462,0.4311719889289,-1.1776787160297,-0.2123682930545,0.5741809404808,1.6467480771198,
+                 -1.1776787160297,0.0736496100492,0.4669242268169,-0.7844040992620,-1.8212189980131,1.0747122709123,
+                 0.8601988435845,-1.7497145222371]
+pop2_z_scores = [-1.0740863394466,0.7276068751090,-1.0047904465791,-0.3811274107714,-0.3118315179039,-1.3512699109167,
+                 -0.7276068751090,0.6583109822415,-0.5890150893740,-0.4504233036389,0.3811274107714,-0.9354945537116,
+                 0.4504233036389,-0.6583109822415,-1.4898616966518,-1.2819740180492,1.4898616966518,0.7969027679765,
+                 -1.2126781251817,-0.8661986608440,-1.6284534823868,-1.4205658037842,1.0047904465791,1.3512699109167,
+                 1.4205658037842,0.9354945537116,1.1433822323141,0.5890150893740,0.3118315179039,0.2425356250363,
+                 1.2819740180492,1.5591575895193,1.2126781251817,0.5197191965064,-0.7969027679765,-0.1732397321688,
+                 1.6284534823868,-0.5197191965064,0.1732397321688,-0.1039438393013,-0.2425356250363,0.1039438393013,
+                 0.8661986608440,-1.6977493752543,-0.0346479464338,1.0740863394466,0.0346479464338,-1.5591575895193,
+                 -1.1433822323141,1.6977493752543]
+pop3_z_scores = [-1.0522735830033,0.6808829066492,-0.3094922302951,1.0522735830033,0.0618984460590,-0.0618984460590,
+                 1.1760704751213,-1.5474611514754,-0.5570860145312,-0.9284766908853,0.4332891224131,-1.2998673672394,
+                 -0.8046797987672,1.5474611514754,1.2998673672394,1.4236642593574,1.6712580435935,-0.4332891224131,
+                 -1.1760704751213,-1.6712580435935,0.1856953381771,0.8046797987672,0.3094922302951,0.5570860145312,
+                 -0.1856953381771,0.9284766908853,-1.4236642593574,-0.6808829066492]
+
+def z_score_validation(data_set, expected_values):
+    mu = mean(data_set)
+    sigma = stdev(data_set, mu)
+    z_scores = []
+    for x in data_set:
+        score = z_score(x, mu, sigma)
+        z_scores.append(score)
+    results = []
+    for calc, expected in zip(z_scores, expected_values):
+        if round(calc,9) == round(expected,9):
+            results.append("pass")
+        else:
+            results.append("fail")
+    if "fail" in results:
+        return "FAIL"
+    else:
+        return "PASS"
+    
+print(z_score_validation(population1, pop1_z_scores))
+print(z_score_validation(population2, pop2_z_scores))
+print(z_score_validation(population3, pop3_z_scores))
